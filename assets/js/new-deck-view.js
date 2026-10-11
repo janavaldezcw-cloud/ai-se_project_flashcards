@@ -18,6 +18,12 @@ function normalizeColor(color) {
   return "#" + hex.toLowerCase();
 }
 
+/**
+ * Checks that a deck name is a string between 2 and 80 characters.
+ *
+ * @param {*} name - The value to validate.
+ * @returns {string|null} The name if valid, otherwise null.
+ */
 function validateName(name) {
   if (typeof name != "string" || name.length < 2 || name.length > 80) {
     return null;
@@ -25,6 +31,12 @@ function validateName(name) {
   return name;
 }
 
+/**
+ * Safely parses a JSON string, without throwing on invalid input.
+ *
+ * @param {string} jsonString - The raw text to parse.
+ * @returns {*} The parsed value, or null if the string isn't valid JSON.
+ */
 function parseJSON(jsonString) {
   try {
     return JSON.parse(jsonString);
@@ -45,11 +57,23 @@ errorCloseBtn.addEventListener("click", () => {
   errorModalEl.classList.remove("modal_visible");
 });
 
+/**
+ * Displays the error modal with a given message.
+ *
+ * @param {string} message - The message to show the user.
+ * @returns {void}
+ */
 function showError(message) {
   errorMessageEl.textContent = message;
   errorModalEl.classList.add("modal_visible");
 }
 
+/**
+ * Enables the new deck form's submit button. Called once the new deck view
+ * is actually showing, since the button starts disabled in the HTML.
+ *
+ * @returns {void}
+ */
 function disableSubmitBtn() {
   submitBtn.disabled = false;
 }

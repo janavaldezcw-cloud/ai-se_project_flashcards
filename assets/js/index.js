@@ -30,6 +30,13 @@ newDeckBtn.addEventListener("click", () => {
   window.location.hash = "new-deck";
 });
 
+/**
+ * Builds a deck list item for the home view, wiring up its link and delete
+ * button.
+ *
+ * @param {object} deck - The deck to render.
+ * @returns {HTMLElement} The populated deck <li> element.
+ */
 function createDeckEl(deck) {
   const cloneEl = deckTemplateEl.content.querySelector("li").cloneNode(true);
   cloneEl.style.setProperty("--card-color", deck.color);
@@ -50,6 +57,11 @@ function createDeckEl(deck) {
   return cloneEl;
 }
 
+/**
+ * Renders the home view's deck list from fetchedDecks.
+ *
+ * @returns {void}
+ */
 function renderHomeView() {
   homeListEl.innerHTML = "";
   fetchedDecks.forEach((deck) => {
@@ -57,6 +69,12 @@ function renderHomeView() {
   });
 }
 
+/**
+ * Hides every page section and resets the shared page-level modifier
+ * classes, so router() can show just the one section a route needs.
+ *
+ * @returns {void}
+ */
 function hideAllSections() {
   homeSection.style.display = "none";
   carouselSection.style.display = "none";
@@ -68,6 +86,13 @@ function hideAllSections() {
   pageEl.classList.remove("page_location_carousel");
 }
 
+/**
+ * Reads the current URL hash and shows whichever section/view matches it:
+ * home, about, the new deck form, a deck's practice view, a deck's open
+ * view, or the 404 view as a fallback.
+ *
+ * @returns {void}
+ */
 function router() {
   const hash = window.location.hash.slice(1) || "home";
   const practiceMatch = hash.match(/^deck\/(.+)\/practice$/);

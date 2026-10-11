@@ -42,6 +42,15 @@ confirmBtn.addEventListener("click", () => {
     });
 });
 
+/**
+ * Opens the confirmation modal for a card the user wants to delete.
+ *
+ * @param {HTMLElement} cardEl - The card element to remove if confirmed.
+ * @param {string} [deckId] - The deck's _id, if this is a whole deck being
+ *   deleted. Leave out when deleting a single flashcard, since deletion is
+ *   only sent to the server for decks right now.
+ * @returns {void}
+ */
 function confirmDelete(cardEl, deckId) {
   currentCardEl = cardEl;
   currentDeckId = deckId || null;
