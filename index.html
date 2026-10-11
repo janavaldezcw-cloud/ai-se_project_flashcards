@@ -81,13 +81,27 @@
         </div>
       </section>
 
-      <section id="about" class="gallery">
-        <h2 class="gallery__title">About</h2>
-        <p>
+      <section id="about" class="about">
+        <h2 class="about__title">About</h2>
+        <p class="about__text">
           Flash Cards is a study app for organizing what you're learning into
           decks of flashcards. Group related questions together, flip a card
           to check the answer, and practice a deck one card at a time.
         </p>
+        <p class="about__text">
+          Want to add your own deck? Paste a JSON array of cards into the New
+          Deck form, matching this shape:
+        </p>
+        <pre class="about__code"><code>{
+  "name": "Deck Name",
+  "color": "#64d583",
+  "cards": [
+    {
+      "question": "What does HTML stand for?",
+      "answer": "HyperText Markup Language"
+    }
+  ]
+}</code></pre>
       </section>
 
       <section class="new-deck-view" id="new-deck-view">

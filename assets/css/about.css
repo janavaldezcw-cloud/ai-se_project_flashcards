@@ -1,0 +1,33 @@
+.about {
+  padding-bottom: 60px;
+}
+
+.about__title {
+  font-weight: 700;
+  font-size: 40px;
+  margin-bottom: 40px;
+}
+
+.about__text {
+  max-width: 670px;
+  margin-bottom: 20px;
+}
+
+.about__code {
+  max-width: 670px;
+  padding: 16px;
+  border: 1px solid #1a1a1a;
+  border-radius: 8px;
+  background-color: #fff;
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-x: auto;
+}
+
+@media screen and (max-width: 600px) {
+  .about__title {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+}
