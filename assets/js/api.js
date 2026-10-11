@@ -1,4 +1,4 @@
-export { getDecks, getDeck };
+export { getDecks, getDeck, deleteDeck, addDeck };
 
 const HEADERS = {
     "Content-Type": "application/json",
@@ -20,6 +20,29 @@ async function getDeck(id) {
     });
     if (!response.ok) {
         throw new Error("Failed to fetch deck");
+    }
+    return await response.json();
+}
+
+async function deleteDeck(id) {
+    const response = await fetch(`${baseUrl}/decks/${id}`, {
+        method: "DELETE",
+        headers: HEADERS
+    });
+    if (!response.ok) {
+        throw new Error("Failed to delete deck");
+    }
+    return await response.json();
+}
+
+async function addDeck(deck) {
+    const response = await fetch(`${baseUrl}/decks`, {
+        method: "POST",
+        headers: HEADERS,
+        body: JSON.stringify(deck)
+    });
+    if (!response.ok) {
+        throw new Error("Failed to add deck");
     }
     return await response.json();
 }

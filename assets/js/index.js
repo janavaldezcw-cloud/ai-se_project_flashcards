@@ -44,7 +44,7 @@ function createDeckEl(deck) {
 
   const deleteBtn = cloneEl.querySelector(".card__action-btn_type_delete");
   deleteBtn.addEventListener("click", () => {
-    confirmDelete(cloneEl);
+    confirmDelete(cloneEl, deck._id);
   });
 
   return cloneEl;

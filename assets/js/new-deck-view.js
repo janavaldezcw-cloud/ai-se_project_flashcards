@@ -1,4 +1,5 @@
 import { fetchedDecks } from "./decks.js";
+import { addDeck } from "./api.js";
 
 const HEX_DIGITS = /^[0-9a-fA-F]{6}$/;
 
@@ -105,18 +106,21 @@ formEl.addEventListener("submit", (e) => {
     return;
   }
 
-  const id = `${slugify(name)}-${Date.now()}`;
-
   const deck = {
-    _id: id,
     color: colorValue,
     name,
     cards: jsonData.cards,
   };
 
-  fetchedDecks.push(deck);
-
-  window.location.hash = "deck/" + id;
+  addDeck(deck)
+    .then((newDeck) => {
+      fetchedDecks.push(newDeck);
+      window.location.hash = "deck/" + newDeck._id;
+    })
+    .catch((error) => {
+      console.error(error);
+      showError("Something went wrong creating the deck. Please try again.");
+    });
 });
 
 export { disableSubmitBtn };
