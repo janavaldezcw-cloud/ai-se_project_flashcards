@@ -4,6 +4,22 @@ const HEADERS = {
     "Content-Type": "application/json",
     Authorization: "01a114a1-7060-73fe-8075-1c12b4a553b3"
 };
+
+/**
+ * Checks whether a fetch response came back ok, so every request in this
+ * file doesn't need to repeat the same if/throw.
+ *
+ * @param {Response} response - The response to check.
+ * @returns {Promise<*>} Resolves with the parsed JSON body if the response
+ *   was ok, otherwise rejects with the response's status.
+ */
+function checkResponse(response) {
+    if (response.ok) {
+        return response.json();
+    }
+    return Promise.reject(`Error: ${response.status}`);
+}
+
 /**
  * Fetches every deck belonging to the current user.
  *
@@ -13,10 +29,7 @@ async function getDecks() {
     const response = await fetch(`${baseUrl}/decks`, {
         headers: HEADERS
     });
-    if (!response.ok) {
-        throw new Error("Failed to fetch decks");
-    }
-    return await response.json();
+    return checkResponse(response);
 }
 
 /**
@@ -29,10 +42,7 @@ async function getDeck(id) {
     const response = await fetch(`${baseUrl}/decks/${id}`, {
         headers: HEADERS
     });
-    if (!response.ok) {
-        throw new Error("Failed to fetch deck");
-    }
-    return await response.json();
+    return checkResponse(response);
 }
 
 /**
@@ -46,10 +56,7 @@ async function deleteDeck(id) {
         method: "DELETE",
         headers: HEADERS
     });
-    if (!response.ok) {
-        throw new Error("Failed to delete deck");
-    }
-    return await response.json();
+    return checkResponse(response);
 }
 
 /**
@@ -67,10 +74,7 @@ async function addDeck(deck) {
         headers: HEADERS,
         body: JSON.stringify(deck)
     });
-    if (!response.ok) {
-        throw new Error("Failed to add deck");
-    }
-    return await response.json();
+    return checkResponse(response);
 }
 
 
