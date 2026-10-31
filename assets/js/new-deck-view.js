@@ -1,5 +1,6 @@
 import { fetchedDecks } from "./decks.js";
 import { addDeck } from "./api.js";
+import { openPopup, closePopup } from "./popup.js";
 
 const HEX_DIGITS = /^[0-9a-fA-F]{6}$/;
 
@@ -54,7 +55,7 @@ const errorCloseBtn = errorModalEl.querySelector(".modal__btn_type_cancel");
 const errorMessageEl = errorModalEl.querySelector(".modal__error");
 
 errorCloseBtn.addEventListener("click", () => {
-  errorModalEl.classList.remove("modal_visible");
+  closePopup(errorModalEl);
 });
 
 /**
@@ -65,7 +66,7 @@ errorCloseBtn.addEventListener("click", () => {
  */
 function showError(message) {
   errorMessageEl.textContent = message;
-  errorModalEl.classList.add("modal_visible");
+  openPopup(errorModalEl);
 }
 
 /**

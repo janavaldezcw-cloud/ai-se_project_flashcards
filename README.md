@@ -41,7 +41,11 @@ and each one gets imported into `assets/css/style.css`. JS is split up too:
 - `index.js` - handles the routing (which page shows based on the URL) and
   the home page
 - `api.js` - all the actual requests to the backend (get decks, get one
-  deck, delete a deck, create a deck) live here
+  deck, delete a deck, create a deck) live here. They all share one
+  `checkResponse` helper instead of repeating the same ok-check every time
+- `popup.js` - two tiny universal functions, `openPopup`/`closePopup`, used
+  by both the delete-confirmation and error modals so that logic only
+  exists once
 - `decks.js` - holds `fetchedDecks` (the array of decks we got from the
   API) and `getDeckByID`, which looks a deck up in that array
 - `deck-view.js` - the page that shows one deck's cards
@@ -73,7 +77,6 @@ This started from a starter template for a photo gallery project, so some of
 the structure (like the BEM class names) comes from that. I ended up
 reworking most of it to fit the flashcard idea instead.
 
-Cards you add through the New Deck form don't actually save to the deck yet -
-the API only seems to accept the deck's name/color on creation, not the
-cards array, so new decks come back empty. Adding/editing/deleting individual
-cards through the API is something I'd still like to add.
+Right now you can only add/remove whole decks through the UI, not individual
+cards within an existing deck. Adding routes for creating, editing, and
+deleting single cards is something I'd still like to add.

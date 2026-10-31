@@ -1,5 +1,6 @@
 import { deleteDeck } from "./api.js";
 import { fetchedDecks } from "./decks.js";
+import { openPopup, closePopup } from "./popup.js";
 
 const confirmationModalEl = document.querySelector("#confirmation-modal");
 const cancelBtn = confirmationModalEl.querySelector(".modal__btn_type_cancel");
@@ -11,7 +12,7 @@ let currentCardEl = null;
 let currentDeckId = null;
 
 cancelBtn.addEventListener("click", () => {
-  confirmationModalEl.classList.remove("modal_visible");
+  closePopup(confirmationModalEl);
   currentCardEl = null;
   currentDeckId = null;
 });
@@ -19,7 +20,7 @@ cancelBtn.addEventListener("click", () => {
 confirmBtn.addEventListener("click", () => {
   if (!currentDeckId) {
     currentCardEl.remove();
-    confirmationModalEl.classList.remove("modal_visible");
+    closePopup(confirmationModalEl);
     currentCardEl = null;
     return;
   }
@@ -33,7 +34,7 @@ confirmBtn.addEventListener("click", () => {
       if (index !== -1) {
         fetchedDecks.splice(index, 1);
       }
-      confirmationModalEl.classList.remove("modal_visible");
+      closePopup(confirmationModalEl);
       currentCardEl = null;
       currentDeckId = null;
     })
@@ -54,7 +55,7 @@ confirmBtn.addEventListener("click", () => {
 function confirmDelete(cardEl, deckId) {
   currentCardEl = cardEl;
   currentDeckId = deckId || null;
-  confirmationModalEl.classList.add("modal_visible");
+  openPopup(confirmationModalEl);
 }
 
 export { confirmDelete };
